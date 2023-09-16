@@ -4,11 +4,11 @@
 
 ## Installation
 
-To install `Publishable` into your Xcode project using SPM, add it to the dependencies value of your Package.swift:
+To install `AutoCleaner` into your Xcode project using SPM, add it to the dependencies value of your Package.swift:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/jinyongp/Publishable.git", from: "1.1.0"),
+    .package(url: "https://github.com/jinyongp/AutoCleaner.git", from: "1.1.0"),
 ]
 ```
 
