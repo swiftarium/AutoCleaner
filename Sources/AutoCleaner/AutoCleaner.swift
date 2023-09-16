@@ -8,7 +8,7 @@ open class AutoCleaner<Collection: Cleanable> {
     /// A typealias for the function that determines which elements should be removed from the collection.
     public typealias Condition = (_ element: Collection.Element) -> Bool
 
-    private(set) var collection: Collection
+    public private(set) var collection: Collection
 
     private(set) var frequency: Frequency?
     private(set) var condition: Condition
