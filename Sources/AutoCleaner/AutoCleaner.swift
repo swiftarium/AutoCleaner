@@ -28,9 +28,12 @@ open class AutoCleaner<Collection: Cleanable> {
 
     /// Starts the automatic cleaning with a given frequency.
     /// - Parameter frequency: A function that specifies the frequency based on current element count.
-    public func start(_ frequency: @escaping Frequency) {
+    /// - Returns: self instance
+    @discardableResult
+    public func start(_ frequency: @escaping Frequency) -> Self {
         self.frequency = frequency
         adjustTimer(force: true)
+        return self
     }
 
     /// Stops the automatic cleaning.

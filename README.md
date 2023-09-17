@@ -16,12 +16,7 @@ And specify `"AutoCleaner"` as a dependency of the Target in which you wish to u
 
 ```swift
 targets: [
-    .target(
-        name: "YourTarget",
-        dependencies: [
-            "AutoCleaner",
-        ]
-    ),
+    .target(name: "YourTarget", dependencies: ["AutoCleaner"]),
 ]
 ```
 
