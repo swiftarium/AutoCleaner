@@ -51,14 +51,10 @@ cleaner.start { count in
 cleaner.stop()
 ```
 
-### Manual Update and Clean
-
-Update the collection:
+### Accessing the collection
 
 ```swift
-cleaner.update { collection in 
-    collection.append(6)
-}
+cleaner.items.forEach { print($0) }
 ```
 
 ### Manually initiate a clean operation:

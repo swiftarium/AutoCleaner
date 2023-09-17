@@ -13,19 +13,13 @@ final class AutoCleanerTests: XCTestCase {
     }
 
     func testInitialization() {
-        XCTAssertEqual(cleaner.collection.count, 10)
+        XCTAssertEqual(cleaner.items.count, 10)
     }
 
     func testCleanMethod() {
         cleaner.clean()
-        XCTAssertEqual(cleaner.collection.count, 5)
-        XCTAssertTrue(cleaner.collection.elements.allSatisfy { !$0.isMultiple(of: 2) })
-    }
-
-    func testUpdateMethod() {
-        cleaner.update { collection in collection.append(11) }
-        XCTAssertEqual(cleaner.collection.count, 11)
-        XCTAssertTrue(cleaner.collection.elements.contains(11))
+        XCTAssertEqual(cleaner.items.count, 5)
+        XCTAssertTrue(cleaner.items.allSatisfy { !$0.isMultiple(of: 2) })
     }
 
     func testTimerCleanup() {
@@ -33,8 +27,8 @@ final class AutoCleanerTests: XCTestCase {
 
         let expect = expectation(description: "Waiting for cleaner")
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-            XCTAssertEqual(self.cleaner.collection.count, 5)
-            XCTAssertTrue(self.cleaner.collection.elements.allSatisfy { !$0.isMultiple(of: 2) })
+            XCTAssertEqual(self.cleaner.items.count, 5)
+            XCTAssertTrue(self.cleaner.items.allSatisfy { !$0.isMultiple(of: 2) })
             expect.fulfill()
         }
 
@@ -43,13 +37,11 @@ final class AutoCleanerTests: XCTestCase {
     
     func testTimerCleanupWithUpdate() {
         cleaner.start { _ in .milliseconds(500) }
-        cleaner.update { collection in
-            collection.append(contentsOf: [11, 12, 13, 14, 15, 16])
-        }
+        cleaner.items.append(contentsOf: [11, 12, 13, 14, 15, 16])
         let expect = expectation(description: "Waiting for cleaner")
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800)) {
-            XCTAssertEqual(self.cleaner.collection.count, 8)
-            XCTAssertTrue(self.cleaner.collection.elements.allSatisfy { !$0.isMultiple(of: 2) })
+            XCTAssertEqual(self.cleaner.items.count, 8)
+            XCTAssertTrue(self.cleaner.items.allSatisfy { !$0.isMultiple(of: 2) })
             expect.fulfill()
         }
         
@@ -65,10 +57,10 @@ final class AutoCleanerTests: XCTestCase {
 
         let expect = expectation(description: "Waiting for cleaner")
 
-        XCTAssertEqual(cleaner.collection.count, 10)
+        XCTAssertEqual(cleaner.items.count, 10)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800)) {
-            XCTAssertEqual(self.cleaner.collection.count, 5)
-            XCTAssertTrue(self.cleaner.collection.elements.allSatisfy { !$0.isMultiple(of: 2) })
+            XCTAssertEqual(self.cleaner.items.count, 5)
+            XCTAssertTrue(self.cleaner.items.allSatisfy { !$0.isMultiple(of: 2) })
             XCTAssertEqual(self.cleanedCount, 5)
             expect.fulfill()
         }
@@ -98,7 +90,7 @@ final class AutoCleanerTests: XCTestCase {
 
         let expect = expectation(description: "Waiting for cleaner to not clean")
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-            XCTAssertEqual(self.cleaner.collection.count, 10)
+            XCTAssertEqual(self.cleaner.items.count, 10)
             expect.fulfill()
         }
 
