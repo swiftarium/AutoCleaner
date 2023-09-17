@@ -8,7 +8,7 @@ To install `AutoCleaner` into your Xcode project using SPM, add it to the depend
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/jinyongp/AutoCleaner.git", from: "1.1.0"),
+    .package(url: "https://github.com/jinyongp/AutoCleaner.git", from: "1.2.0"),
 ]
 ```
 
